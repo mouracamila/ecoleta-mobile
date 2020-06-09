@@ -1,42 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 import { Feather as Icon } from "@expo/vector-icons";
-import { View, Image, Text, StyleSheet, ImageBackground } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
-  const navigation = useNavigation();
+  const [uf, setUf] = useState("");
+  const [city, setCity] = useState("");
 
+  const navigation = useNavigation();
   function handleNavigateToPoints() {
-    navigation.navigate("Points");
+    navigation.navigate("Points", {
+      uf,
+      city,
+    });
   }
 
   return (
-    <ImageBackground
-      source={require("../../assets/home-background.png")}
-      style={styles.container}
-      imageStyle={{ width: 274, height: 368 }}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "android" ? "padding" : undefined}
     >
-      <View style={styles.main}>
-        <Image source={require("../../assets/logo.png")} />
-        <Text style={styles.title}>Your recyclable collection point </Text>
-        <Text style={styles.description}>
-          Helping peoples to find recyclable collection point
-        </Text>
-      </View>
+      <ImageBackground
+        source={require("../../assets/home-background.png")}
+        style={styles.container}
+        imageStyle={{ width: 274, height: 368 }}
+      >
+        <View style={styles.main}>
+          <Image source={require("../../assets/logo.png")} />
 
-      <View style={styles.footer}>
-        <RectButton style={styles.button} onPress={handleNavigateToPoints}>
-          <View style={styles.buttonIcon}>
-            <Text>
-              <Icon name="arrow-right" color="#FFF" size={24} />
+          <View>
+            <Text style={styles.title}>Your recyclable collection point </Text>
+            <Text style={styles.description}>
+              Helping peoples to find recyclable collection point
             </Text>
           </View>
+        </View>
 
-          <Text style={styles.buttonText}>Enter</Text>
-        </RectButton>
-      </View>
-    </ImageBackground>
+        <View style={styles.footer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Type the UF"
+            value={uf}
+            maxLength={2}
+            autoCapitalize="characters"
+            autoCorrect={false}
+            onChangeText={setUf}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Type the City"
+            value={city}
+            autoCapitalize="characters"
+            onChangeText={setCity}
+          />
+
+          <RectButton style={styles.button} onPress={handleNavigateToPoints}>
+            <View style={styles.buttonIcon}>
+              <Text>
+                <Icon name="arrow-right" color="#FFF" size={24} />
+              </Text>
+            </View>
+
+            <Text style={styles.buttonText}>Enter</Text>
+          </RectButton>
+        </View>
+      </ImageBackground>
+    </KeyboardAvoidingView>
   );
 };
 
