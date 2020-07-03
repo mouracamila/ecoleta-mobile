@@ -6,7 +6,7 @@
 
 Ecoleta is a Web and Mobile application to help people find collection points for recycle. This Aplication was developed during NLW, event by RocketSeat.
 
-The Ecoleta project was tree partes, this repository is a mobile aplication.  
+The Ecoleta project has three parts, this repository is a mobile application.  
 The backend is available here [ecoleta-serv](https://github.com/mouracamila/ecoleta-serv)
 And the frontend application here [ecoleta-mobile](https://github.com/mouracamila/ecoleta-web)
 
